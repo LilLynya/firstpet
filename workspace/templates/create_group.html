@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/input-file.css' %}">
+
+    <!------------------LIght BOx for Gallery-------------->
+    <link rel="stylesheet" href="{% static 'lightbox.min.css' %}">
+    <script type="text/javascript" src="lightbox-plus-jquery.min.js"></script>
+    <!------------------LIght BOx for Gallery-------------->
+    <title>Add a group</title>
+    <style>
+
+        form{
+            height: 650px;
+            width: 400px;
+            background-color: rgba(30, 30, 250, 0.15);;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+        }
+
+        form *{
+            font-family: 'Poppins',sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+        form h3{
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        label{
+            display: block;
+            margin-top: -10px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input{
+            display: block;
+            height: 37px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder{
+            color: #e5e5e5;
+        }
+
+        button{
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<!--Navigation starts-->
+
+<nav class="navbar navbar-expand-md navbar-dark mb-4" style="background-color:#3097D1">
+    <a href="{% url 'workspace:workspace' %}" class="navbar-brand"><img src="img/brand-white.png" alt="logo"
+                                                                        class="img-fluid" width="80px"
+                                                                        height="100px"></a>
+
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#responsive"><span
+            class="navbar-toggler-icon"></span></button>
+
+
+    <div class="collapse navbar-collapse" id="responsive">
+        <ul class="navbar-nav mr-auto text-capitalize">
+            <li class="nav-item"><a href="{% url 'workspace:workspace' %}" class="nav-link active">Workspace</a></li>
+            <li class="nav-item"><a href="{% url 'workspace:my_group' %}" class="nav-link active">My group</a></li>
+            <li class="nav-item"><a href="#" class="nav-link d-md-none">logout</a></li>
+
+        </ul>
+
+        <!--        -->
+        <a href="{% url 'workspace:user_profile' user_id=request.user.nickname %}"> <img src="{{ selfuser.avatar.url }}"
+                                                                                         alt=""
+                                                                                         class="rounded-circle ml-3 d-none d-md-block"
+                                                                                         width="32px"
+                                                                                         height="32px"></a>
+
+
+    </div>
+
+
+</nav>
+
+<!--Navigation ends-->
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

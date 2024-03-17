@@ -1,0 +1,415 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!------------------LIght BOx for Gallery-------------->
+    <link rel="stylesheet" href="{% static 'lightbox.min.css' %}">
+    <script type="text/javascript" src="lightbox-plus-jquery.min.js"></script>
+    <!------------------LIght BOx for Gallery-------------->
+    <title>Add a group</title>
+    <style>
+
+      form{
+          height: 520px;
+          width: 400px;
+          background-color: rgba(30, 30, 250, 0.15);;
+          position: absolute;
+          transform: translate(-50%,-50%);
+          top: 50%;
+          left: 50%;
+          border-radius: 10px;
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(255,255,255,0.1);
+          box-shadow: 0 0 40px rgba(8,7,16,0.6);
+          padding: 50px 35px;
+      }
+
+      form *{
+          font-family: 'Poppins',sans-serif;
+          color: #ffffff;
+          letter-spacing: 0.5px;
+          outline: none;
+          border: none;
+      }
+      form h3{
+          font-size: 32px;
+          font-weight: 500;
+          line-height: 42px;
+          text-align: center;
+      }
+
+      label{
+          display: block;
+          margin-top: 30px;
+          font-size: 16px;
+          font-weight: 500;
+      }
+
+      input{
+          display: block;
+          height: 50px;
+          width: 100%;
+          background-color: #ffffff;
+          color: #080710;
+          border-radius: 3px;
+          padding: 0 10px;
+          margin-top: 8px;
+          font-size: 14px;
+          font-weight: 300;
+      }
+
+      ::placeholder{
+          color: #e5e5e5;
+      }
+
+      button{
+          margin-top: 50px;
+          width: 100%;
+          background-color: #ffffff;
+          color: #080710;
+          padding: 15px 0;
+          font-size: 18px;
+          font-weight: 600;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+        {% endblock form %}
+    </style>
+</head>
+<body>
+
+
+<!--Navigation starts-->
+
+<nav class="navbar navbar-expand-md navbar-dark mb-4" style="background-color:#3097D1">
+    <a href="{% url 'workspace:workspace' %}" class="navbar-brand"><img src="img/brand-white.png" alt="logo" class="img-fluid" width="80px"
+                                                   height="100px"></a>
+
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#responsive"><span
+            class="navbar-toggler-icon"></span></button>
+
+
+    <div class="collapse navbar-collapse" id="responsive">
+        <ul class="navbar-nav mr-auto text-capitalize">
+            <li class="nav-item"><a href="{% url 'workspace:workspace' %}" class="nav-link active">Workspace</a></li>
+            <li class="nav-item"><a href="{% url 'workspace:my_group' %}" class="nav-link active">My group</a></li>
+            <li class="nav-item"><a href="#" class="nav-link d-md-none">logout</a></li>
+
+        </ul>
+
+        <!--        -->
+        <a href="{% url 'workspace:user_profile' user_id=request.user.nickname %}"> <img src="{{ selfuser.avatar.url }}"
+                                                                                         alt=""
+                                                                                         class="rounded-circle ml-3 d-none d-md-block"
+                                                                                         width="32px"
+                                                                                         height="32px"></a>
+
+
+    </div>
+
+
+</nav>
+
+<!--Navigation ends-->
+
+<div class="container">
+    <div class="row">
+
+
+        <!--------------------------left columns  start-->
+
+        <div class="col-12 col-lg-3">
+
+            <div class="left-column">
+
+
+                <div class="card card-left1 mb-4">
+                    <img src="" alt="" class="card-img-top img-fluid">
+                    <div class="card-body text-center ">
+                        <img src="{{ tasks.image.url }}" alt="img" width="120px" height="120px"
+                             class="rounded-circle mt-n5">
+                        <h5 class="card-title">{{ tasks.title }}</h5>
+                        <p class="card-text text-justify mb-2">{{ tasks.bio }}</p>
+                        <ul class="list-unstyled nav justify-content-center">
+                            <a href="{% url 'workspace:my_group' %}" class="text-dark text-decoration-none">
+                                <li class="nav-item">Members <br> <strong>{{ members }}</strong></li>
+                            </a>
+                            </a>
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
+
+<!--                <div class="card shadow-sm card-left2 mb-4">-->
+
+<!--                    <div class="card-body">-->
+
+<!--                        <h5 class="mb-3 card-title">About <small><a href="#" class="ml-1">Edit</a></small></h5>-->
+
+<!--                        <p class="card-text"><i class="fas fa-calendar-week mr-2"></i> Went to <a href="#"-->
+<!--                                                                                                  class="text-decoration-none">oh-->
+<!--                            canada</a></p>-->
+
+<!--                        <p class="card-text"><i class="fas fa-user-friends mr-2"></i> Become a friend with <a href="#"-->
+<!--                                                                                                              class="text-decoration-none">obama</a>-->
+<!--                        </p>-->
+<!--                        <p class="card-text"><i class="far fa-building mr-2"></i> Work at <a href="#"-->
+<!--                                                                                             class="text-decoration-none">Github</a>-->
+<!--                        </p>-->
+<!--                        <p class="card-text"><i class="fas fa-home mr-2"></i> Live in <a href="#"-->
+<!--                                                                                         class="text-decoration-none">San-->
+<!--                            francisco</a></p>-->
+<!--                        <p class="card-text"><i class="fas fa-map-marker mr-2"></i> From <a href="#"-->
+<!--                                                                                            class="text-decoration-none">Seattle,-->
+<!--                            WA</a></p>-->
+
+
+<!--                    </div>-->
+
+
+<!--                </div>-->
+
+
+<!--                <div class="card shadow-sm card-left3 mb-4">-->
+
+                    <!--                    <div class="card-body">-->
+                    <!--                        <h5 class="card-title">Photos<small class="ml-2"><a href="#">.Edit </a></small></h5>-->
+
+                    <!--                        <div class="row">-->
+                    <!--                            <div class="col-6 p-1">-->
+                    <!--                                <a href="img/left1.jpg" data-lightbox="id"><img src="img/left1.jpg" alt="img"-->
+                    <!--                                                                                class="img-fluid my-2"></a>-->
+                    <!--                                <a href="img/left2.jpg" data-lightbox="id"><img src="img/left2.jpg" alt="img"-->
+                    <!--                                                                                class="img-fluid my-2"></a>-->
+                    <!--                                <a href="img/left3.jpg" data-lightbox="id"><img src="img/left3.jpg" alt="img"-->
+                    <!--                                                                                class="img-fluid my-2"></a>-->
+
+                    <!--                            </div>-->
+
+
+                    <!--                            <div class="col-6 p-1">-->
+                    <!--                                <a href="img/left4.jpg" data-lightbox="id"><img src="img/left4.jpg" alt="img"-->
+                    <!--                                                                                class="img-fluid my-2"></a>-->
+                    <!--                                <a href="img/left5.jpg" data-lightbox="id"><img src="img/left5.jpg" alt="img"-->
+                    <!--                                                                                class="img-fluid my-2"></a>-->
+                    <!--                                <a href="img/left6.jpg" data-lightbox="id"><img src="img/left6.jpg" alt="img"-->
+                    <!--                                                                                class="img-fluid my-2"></a>-->
+
+                    <!--                            </div>-->
+
+                    <!--                        </div>-->
+
+                    <!--                    </div>-->
+
+
+<!--                </div>-->
+
+
+            </div>
+
+
+        </div>
+
+
+        <!--------------------------Ends Left columns-->
+
+
+        <!---------------------------------------Middle columns  start---------------->
+
+
+        <div class="col-12 col-lg-6">
+
+
+            <div class="middle-column">
+
+
+                <div class="card">
+
+
+                    <div class="card-header bg-transparent">
+                        <form class="form-inline">
+
+
+                            <div class="input-group w-100">
+                                <input type="text" name="message" id="message" placeholder="Message"
+                                       class="form-control form-control-md">
+
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+
+                    <!--                    <div class="card-body">-->
+
+                    <!--                        <div class="media">-->
+                    <!--                            <img src="img/avatar-dhg.png" alt="img" width="55px" height="55px"-->
+                    <!--                                 class="rounded-circle mr-3">-->
+
+                    <!--                            <div class="media-body">-->
+                    <!--                                <h5>Dave Gamache</h5>-->
+                    <!--                                <p class="card-text text-justify">Aenean lacinia bibendum nulla sed consectetur.-->
+                    <!--                                    Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac-->
+                    <!--                                    consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in,-->
+                    <!--                                    egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis-->
+                    <!--                                    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>-->
+
+
+                    <!--                                <div class="row no-gutters mb-3">-->
+                    <!--                                    <div class="col-6 p-1 text-center">-->
+
+                    <!--                                        <img src="img/adventure-alps-clouds-2259810.jpg" alt="" class="img-fluid mb-2">-->
+                    <!--                                        <img src="img/aerial-view-architectural-design-buildings-2228123.jpg" alt=""-->
+                    <!--                                             class="img-fluid">-->
+
+
+                    <!--                                    </div>-->
+
+                    <!--                                    <div class="col-6 p-1 text-center">-->
+
+                    <!--                                        <img src="img/celebration-colored-smoke-dark-2297472.jpg" alt=""-->
+                    <!--                                             class="img-fluid mb-2">-->
+                    <!--                                        <img src="img/bodybuilding-exercise-fitness-2294361.jpg" alt=""-->
+                    <!--                                             class="img-fluid">-->
+
+
+                    <!--                                    </div>-->
+
+
+                    <!--                                </div>-->
+
+
+                    <!--                                <div class="media mb-3">-->
+                    <!--                                    <img src="img/avatar-dhg.png" alt="img" width="45px" height="45px"-->
+                    <!--                                         class="rounded-circle mr-2">-->
+                    <!--                                    <div class="media-body">-->
+                    <!--                                        <p class="card-text text-justify">Jacon Thornton: Donec id elit non mi porta-->
+                    <!--                                            gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum-->
+                    <!--                                            faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla.-->
+                    <!--                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed-->
+                    <!--                                            posuere consectetur est at lobortis.</p>-->
+
+                    <!--                                    </div>-->
+
+
+                    <!--                                </div>-->
+
+
+                    <!--                                <div class="media">-->
+                    <!--                                    <img src="img/avatar-mdo.png" alt="img" width="45px" height="45px"-->
+                    <!--                                         class="rounded-circle mr-2">-->
+                    <!--                                    <div class="media-body">-->
+                    <!--                                        <p class="card-text text-justify">Mark Otto: Lorem ipsum dolor sit amet,-->
+                    <!--                                            consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor-->
+                    <!--                                            mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>-->
+
+                    <!--                                    </div>-->
+
+
+                    <!--                                </div>-->
+
+
+                    <!--                            </div>-->
+                    <!--                            <small>5min</small>-->
+
+
+                    <!--                        </div>-->
+
+
+                    <!--                    </div>-->
+
+
+                    <!--                    <hr>-->
+
+                    <div class="card-body">
+
+                        <div class="media">
+                            {% if tasks %}
+                            {% for task in tasks %}
+                            <img src="img/avatar-fat.jpg" alt="img" width="55px" height="55px"
+                                 class="rounded-circle mr-3">
+
+                            <div class="media-body">
+                                <h5>{{ task.by }}</h5>
+                                <p class="text-justify">{{ task.task }}</p>
+
+
+                            </div>
+
+                            <small>{{ task.begins }} - {{ task.ends }}</small>
+                            <hr>
+                            {% endfor %}
+
+                            {% else %}
+                            <div class="media-body">
+                                <h5>Your tasks:</h5>
+                                <p class="text-justify">Nothing here, but something will be soon.</p>
+                            </div>
+                            {% endif %}
+
+
+                        </div>
+                        <hr>
+
+                        <!--                    <div class="card-body">-->
+
+                        <!--                        <div class="media">-->
+
+                        <!--                            <img src="img/avatar-mdo.png" alt="img" width="55px" height="55px"-->
+                        <!--                                 class="rounded-circle mr-3">-->
+                        <!--                            <div class="media-body">-->
+                        <!--                                <h5>Mark Otto</h5>-->
+                        <!--                                <p class="text-justify">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum-->
+                        <!--                                    id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem-->
+                        <!--                                    lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod.-->
+                        <!--                                    Donec sed odio dui.</p>-->
+                        <!--                                <a href="img/mid5.jpg" data-lightbox="id"><img src="img/mid5.jpg" alt=""-->
+                        <!--                                                                               class="img-fluid shadow-sm img-thumbnail">-->
+                        <!--                                </a>-->
+
+                        <!--                            </div>-->
+
+
+                        <!--                            <small class="text-muted">10 min</small>-->
+
+
+                        <!--                        </div>-->
+
+
+                        <!--                    </div>-->
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <br> <br> <br><br> <br> <br>
+</body>
+</html>

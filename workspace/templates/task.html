@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        var $carsList = $('#carsList'),
+        carObj = {};
+        carObj.length = 0;
+        $('.cars').change(function(){
+            carObj[$(this).index()] = $(this).val();
+            carObj.length = Object.keys(carObj).length - 1;
+            $carsList.val(Array.prototype.join.call(carObj, ', '));
+        })
+    });
+</script>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
